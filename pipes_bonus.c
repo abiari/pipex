@@ -6,7 +6,7 @@
 /*   By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 09:52:13 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/09 10:07:11 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/09 12:19:54 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ void	spawn_lastcmd(int in, t_data *line, int *fd, char **envp)
 	}
 }
 
+void	pipes_exit(char *bin)
+{
+	if (bin == NULL)
+		exit (1);
+}
+
 void	loop_pipes(t_data *line, int *fd, int *in, char **envp)
 {
 	while (line->cmds[line->i + 1] != NULL)
@@ -81,9 +87,9 @@ void	loop_pipes(t_data *line, int *fd, int *in, char **envp)
 		}
 		line->bin = line->cmds[line->i][0];
 		line->cmds[line->i][0] = check_exec(line->cmds[line->i][0], line->envl);
-		free(line->bin);
-		if (line->cmds[line->i][0] == NULL)
-			exit (1);
+		if (line->bin != line->cmds[line->i][0])
+			free(line->bin);
+		pipes_exit(line->cmds[line->i][0]);
 		pipe(fd);
 		spawn_proc(*in, fd, line->cmds[line->i], envp);
 		close(fd[1]);
@@ -105,7 +111,8 @@ void	fork_pipes(t_data *line, char **envp)
 	loop_pipes(line, fd, &in, envp);
 	bin = line->cmds[line->i][0];
 	line->cmds[line->i][0] = check_exec(line->cmds[line->i][0], line->envl);
-	free(bin);
+	if (bin != line->cmds[line->i][0])
+		free(bin);
 	if (line->cmds[line->i][0] == NULL)
 		exit (1);
 	spawn_lastcmd(in, line, fd, envp);

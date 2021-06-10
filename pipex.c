@@ -6,11 +6,11 @@
 /*   By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:26:20 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/09 09:52:32 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/09 12:20:31 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	ft_free(t_data *line)
 {
@@ -23,10 +23,14 @@ void	ft_free(t_data *line)
 		j = 0;
 		while (line->cmds[i][j])
 		{
-			free(line->cmds[i][j]);
+			if (line->cmds[i][j])
+				free(line->cmds[i][j]);
+			line->cmds[i][j] = NULL;
 			j++;
 		}
-		free(line->cmds[i]);
+		if (line->cmds[i])
+			free(line->cmds[i]);
+		line->cmds[i] = NULL;
 		i++;
 	}
 	ft_lstclear(&line->envl, &envl_clear);
@@ -78,9 +82,9 @@ int	main(int argc, char *argv[], char **envp)
 	t_data	*line;
 
 	(void)envp;
-	if (argc < 2)
+	if (argc != 5)
 	{
-		write(1, "\n", 1);
+		ft_putstr_fd("error argument\n", 2);
 		return (1);
 	}
 	line = init_line(argc, argv, envp);

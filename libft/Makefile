@@ -6,7 +6,7 @@
 #    By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 15:27:47 by abiari            #+#    #+#              #
-#    Updated: 2021/06/08 08:32:26 by abiari           ###   ########.fr        #
+#    Updated: 2021/06/10 07:10:16 by abiari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c\
 ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c\
 ft_tolower.c ft_toupper.c ft_bzero.c ft_atoi.c\
 ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isdigit.c\
-ft_isprint.c ft_itoa.c ft_isascii.c ft_substr.c ft_strcmp.c\
+ft_isprint.c ft_itoa.c ft_isascii.c ft_substr.c ft_strcmp.c get_next_line.c\
 
 OBJ = $(SRC:.c=.o)
 

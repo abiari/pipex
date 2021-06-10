@@ -6,7 +6,7 @@
 /*   By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 11:21:56 by moerradi          #+#    #+#             */
-/*   Updated: 2021/06/09 09:56:50 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/10 07:09:59 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *),
 			void (*del)(void *));
+int		get_next_line(int fd, char **line);
 #endif
