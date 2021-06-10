@@ -6,7 +6,7 @@
 /*   By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 09:52:13 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/10 11:48:55 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/10 14:00:22 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ void	spawn_lastcmd(int in, t_data *line, int *fd, char **envp)
 
 	if (fork() == 0)
 	{
-		file = open(line->outfile, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR
-				| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
-		if (file < 0)
-		{
-			ft_putendl_fd(strerror(errno), 2);
-			exit(1);
-		}
 		if (fd[1] > 2)
 			close(fd[1]);
 		if (in != 0)
 		{
 			dup2(in, STDIN_FILENO);
 			close(in);
+		}
+		file = open(line->outfile, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR
+				| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+		if (file < 0)
+		{
+			ft_putendl_fd(strerror(errno), 2);
+			exit(1);
 		}
 		dup2(file, STDOUT_FILENO);
 		close(file);
@@ -133,3 +133,5 @@ int	fork_pipes(t_data *line, char **envp)
 				ret = WEXITSTATUS(status);
 	return (ret);
 }
+
+// waitpid with pid

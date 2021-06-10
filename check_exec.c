@@ -6,7 +6,7 @@
 /*   By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 17:38:04 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/10 11:14:47 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/10 13:04:14 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,18 @@ char	*check_exec(char *cmd, t_list *envl)
 {
 	char	*bin;
 	int		fd;
+	char	*tmp;
 
 	bin = cmd;
 	fd = open(bin, O_RDONLY);
 	if (fd < 0)
 		bin = bin_path(bin, envl);
+	else
+	{
+		tmp = bin_path(bin, envl);
+		if (tmp != NULL)
+			bin = tmp;
+	}
 	close(fd);
 	return (bin);
 }
