@@ -6,7 +6,7 @@
 /*   By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 17:38:04 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/09 12:02:56 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/10 11:14:47 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*loop_path(char **split_path, char *cmd)
 		free(path);
 		i++;
 	}
-	ft_putstr_fd("msh: command not found", 2);
+	ft_putstr_fd("Command not found\n", 2);
 	free(split_path);
 	return (NULL);
 }

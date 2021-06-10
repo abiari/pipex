@@ -6,11 +6,11 @@
 /*   By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:26:20 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/09 12:20:31 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/10 11:34:25 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "pipex.h"
 
 void	ft_free(t_data *line)
 {
@@ -80,15 +80,17 @@ t_data	*init_line(int argc, char *argv[], char **envp)
 int	main(int argc, char *argv[], char **envp)
 {
 	t_data	*line;
+	int		ret;
 
 	(void)envp;
+	ret = 0;
 	if (argc != 5)
 	{
 		ft_putstr_fd("error argument\n", 2);
 		return (1);
 	}
 	line = init_line(argc, argv, envp);
-	fork_pipes(line, envp);
+	ret = fork_pipes(line, envp);
 	ft_free(line);
-	return (0);
+	return (ret);
 }

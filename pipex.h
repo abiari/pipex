@@ -37,8 +37,8 @@ int		delete_env_var(char *var, t_list **envl);
 t_envl	*find_env_var(char *var, t_list **envl);
 char	*bin_path(char *cmd, t_list *envl);
 char	*check_exec(char *cmd, t_list *envl);
-void	fork_pipes(t_data *line, char **envp);
+int		fork_pipes(t_data *line, char **envp);
 void	loop_pipes(t_data *line, int *fd, int *in, char **envp);
 void	spawn_lastcmd(int in, t_data *line, int *fd, char **envp);
-void	spawn_proc(int in, int *fd, char **cmd, char *envp[]);
+void	spawn_proc(int in, int *fd, t_data *line, char *envp[]);
 #endif
