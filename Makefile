@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+         #
+#    By: abiari <abiari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/08 08:41:04 by abiari            #+#    #+#              #
-#    Updated: 2021/06/10 10:18:47 by abiari           ###   ########.fr        #
+#    Updated: 2021/06/12 14:19:53 by abiari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,13 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g3
 
 SRC = pipex.c utils/env_utils.c utils/envp_to_envl.c utils/lst_append.c\
-check_exec.c pipes.c
+check_exec.c pipes.c pipes_helper.c
 
 OBJ = $(SRC:.c=.o)
 
 SRC_BONUS = pipex_bonus.c utils_bonus/env_utils_bonus.c\
 utils_bonus/envp_to_envl_bonus.c utils_bonus/lst_append_bonus.c\
-check_exec_bonus.c pipes_bonus.c
+check_exec_bonus.c pipes_bonus.c pipes_helper_bonus.c
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 

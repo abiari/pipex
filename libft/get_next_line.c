@@ -6,7 +6,7 @@
 /*   By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 14:11:53 by abiari            #+#    #+#             */
-/*   Updated: 2021/05/06 12:39:51 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/10 15:54:40 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*ft_stock(int fd, char *str)
 		str = ft_strdup("");
 	while (ft_strchr(str, '\n') == NULL)
 	{
-		if ((b_read = read(fd, buff, BUFFER_SIZE)) < 0)
+		b_read = read(fd, buff, BUFFER_SIZE);
+		if ((b_read) < 0)
 		{
 			free(buff);
 			return (0);
@@ -40,6 +41,16 @@ char	*ft_stock(int fd, char *str)
 	return (str);
 }
 
+int	exit_nonewline(char *line, char *str)
+{
+	line = ft_strdup(str);
+	if (!(line))
+		return (-1);
+	free(str);
+	str = NULL;
+	return (0);
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*str;
@@ -48,16 +59,11 @@ int	get_next_line(int fd, char **line)
 
 	if (fd < 0 || !line || read(fd, &c, 0))
 		return (-1);
-	if ((str = ft_stock(fd, str)) == NULL)
+	str = ft_stock(fd, str);
+	if ((str) == NULL)
 		return (0);
 	if (!(ft_strchr(str, '\n')))
-	{
-		if (!(*line = ft_strdup(str)))
-			return (-1);
-		free(str);
-		str = NULL;
-		return (0);
-	}
+		return (exit_nonewline(*line, str));
 	else
 	{
 		temp = str;

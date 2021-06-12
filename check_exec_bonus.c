@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_exec_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abiari <abiari@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: abiari <abiari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 17:38:04 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/10 11:14:54 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/12 14:18:02 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,37 +46,43 @@ char	*loop_path(char **split_path, char *cmd)
 		free(path);
 		i++;
 	}
-	ft_putstr_fd("Command not found\n", 2);
 	free(split_path);
-	return (NULL);
+	return (cmd);
 }
 
-char	*bin_path(char *cmd, t_list *envl)
+char	*bin_path(char *cmd, t_data *line, t_list *envl)
 {
 	char	**split_path;
 	int		i;
+	t_envl	*path;
 
 	i = 0;
-	split_path = ft_split((find_env_var("PATH", &envl))->value, ':');
+	path = find_env_var("PATH", &envl);
+	if (!path)
+	{
+		line->nopath = 1;
+		return (cmd);
+	}
+	split_path = ft_split(path->value, ':');
 	if (!split_path)
 	{
-		ft_putstr_fd("msh: No such file or directory", 2);
-		return (NULL);
+		line->nopath = 1;
+		return (cmd);
 	}
 	return (loop_path(split_path, cmd));
 }
 
-char	*check_exec(char *cmd, t_list *envl)
+char	*check_exec(char *cmd, t_data *line, t_list *envl)
 {
 	char	*bin;
 	int		fd;
 
+	if (!cmd)
+		return (ft_strdup(""));
 	bin = cmd;
 	fd = open(bin, O_RDONLY);
 	if (fd < 0)
-	{
-		bin = bin_path(bin, envl);
-		close(fd);
-	}
+		bin = bin_path(bin, line, envl);
+	close(fd);
 	return (bin);
 }

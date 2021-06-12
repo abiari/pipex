@@ -24,6 +24,8 @@ typedef struct s_data
 	int		i;
 	t_list	*envl;
 	char	*bin;
+	pid_t	pid;
+	int		nopath;
 }				t_data;
 
 char	*find_env_key(const char *envp);
@@ -35,10 +37,13 @@ void	add_env_var(char *var, char *value, t_list **envl);
 void	envl_clear(void *content);
 int		delete_env_var(char *var, t_list **envl);
 t_envl	*find_env_var(char *var, t_list **envl);
-char	*bin_path(char *cmd, t_list *envl);
-char	*check_exec(char *cmd, t_list *envl);
+char	*bin_path(char *cmd, t_data *line, t_list *envl);
+char	*check_exec(char *cmd, t_data *line, t_list *envl);
 int		fork_pipes(t_data *line, char **envp);
 void	loop_pipes(t_data *line, int *fd, int *in, char **envp);
 void	spawn_lastcmd(int in, t_data *line, int *fd, char **envp);
+void	print_error(int *in, t_data *line);
 void	spawn_proc(int in, int *fd, t_data *line, char *envp[]);
+void	wait_procs(int *ret, int *status, t_data *line);
+void	ft_err(t_data *line);
 #endif
