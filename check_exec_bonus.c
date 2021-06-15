@@ -6,7 +6,7 @@
 /*   By: abiari <abiari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 17:38:04 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/12 14:18:02 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/15 20:42:05 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ char	*check_exec(char *cmd, t_data *line, t_list *envl)
 	char	*bin;
 	int		fd;
 
-	if (!cmd)
-		return (ft_strdup(""));
 	bin = cmd;
+	if (bin[0] == '\0')
+		return (bin);
 	fd = open(bin, O_RDONLY);
 	if (fd < 0)
 		bin = bin_path(bin, line, envl);
