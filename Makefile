@@ -6,13 +6,13 @@
 #    By: abiari <abiari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/08 08:41:04 by abiari            #+#    #+#              #
-#    Updated: 2021/06/15 20:00:31 by abiari           ###   ########.fr        #
+#    Updated: 2021/06/16 10:30:26 by abiari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g3
 
 SRC = pipex.c utils/env_utils.c utils/envp_to_envl.c utils/lst_append.c\
 check_exec.c pipes.c pipes_helper.c

@@ -6,7 +6,7 @@
 /*   By: abiari <abiari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 15:29:52 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/12 14:10:27 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/16 11:20:40 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	heredoc(t_data *data, int fd)
 		if (get_next_line(0, &line) <= 0)
 			break ;
 		if (!ft_strcmp(line, data->infile))
+		{
+			free(line);
 			break ;
+		}
 		ft_putendl_fd(line, fd);
 		free(line);
 	}

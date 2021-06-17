@@ -6,7 +6,7 @@
 /*   By: abiari <abiari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:26:20 by abiari            #+#    #+#             */
-/*   Updated: 2021/06/15 20:07:51 by abiari           ###   ########.fr       */
+/*   Updated: 2021/06/16 11:21:39 by abiari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	fill_it(char **raw_cmds, char ***cmds, int argc, char **argv)
 		cmds[i] = ft_split(raw_cmds[i], ' ');
 		if (cmds[i][0] == NULL)
 		{
+			free(cmds[i]);
 			cmds[i] = (char **)malloc(sizeof(char *) * 2);
 			cmds[i][0] = ft_strdup("");
 			cmds[i][1] = NULL;
